@@ -86,6 +86,10 @@ stim_consec=4
 ans_consec=4 
 
 # generate long sequence by fragments---------------
+again = TRUE
+while(again){
+again = FALSE
+
 finished = FALSE
 c = 1
 while(!finished){
@@ -134,7 +138,7 @@ while(!finished){
     z = table(paste0(output$per,output$persw),paste0(output$ans,output$anssw))
     z = z[c("SRp","SSh","WRp","WSh"),c("LRp","LSh","RRp","RSh")]
     
-    if(length(which(z==0))==0 && length(which(z==3))==0 && length(which(z==5))==0 && length(which(z==6))==0){
+    if(length(which(z==0))==0 && length(which(z==3))==0 && length(which(z==4))==0 && length(which(z==5))==0 && length(which(z==6))==0){
       finished = TRUE
     }
     
@@ -153,6 +157,17 @@ output.nice = data.frame(cond = paste0(output$per,output$persw),
 j = which(z==1,arr.ind=TRUE)
 output.nice$cond[1]=rownames(z)[j[1]]
 output.nice$ans_rep[1]=colnames(z)[j[2]]
+
+if (substr(output.nice$cond[1],1,1)=="W"){
+  #again = FALSE
+}
+
+} # end of biggest while loop
+
+
+# if something is messed up then run again
+#print("oop we need to run again ......................")
+#source("genseq_VSPT_EEG.R")
 
 
 # double checking ----------------
