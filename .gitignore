@@ -6,4 +6,5 @@
 *.Rproj
 *.csv
 *.xlsx
+*.txt
 .Rproj.user
