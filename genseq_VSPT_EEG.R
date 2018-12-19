@@ -1,6 +1,6 @@
 ###################################################################### 
 # Generate new pseudorandom sequence for VSPT EEG
-# v2b written by Enoch 20181218
+# v2c written by Enoch 20181219
 # Press "source" to run the whole program!
 # The generated sequence is stored in the dataframe called "output"
 # The "output" is then recoded nicely to "output.nice"
@@ -158,6 +158,7 @@ j = which(z==1,arr.ind=TRUE)
 output.nice$cond[1]=rownames(z)[j[1]]
 output.nice$ans_rep[1]=colnames(z)[j[2]]
 
+# last line of defence
 if (substr(output.nice$cond[1],1,1)=="W"){
   #again = FALSE
 }
