@@ -1,7 +1,10 @@
-#Generate new sequence for VSPT EEG
+###################################################################### 
+# Generate new pseudorandom sequence for VSPT EEG
 # v2b written by Enoch 20181218
-#press "source" to run the whole program!
-#the generated sequence is stored in the dataframe called "output"
+# Press "source" to run the whole program!
+# The generated sequence is stored in the dataframe called "output"
+# The "output" is then recoded nicely to "output.nice"
+######################################################################
 
 #custom function to check whether there is n or less consecutive duplicates in vector x
 checkseq = function(x, n){
@@ -78,11 +81,11 @@ n = nrow(m)
 
 minlen = 8
 len=32  #controls how long the total sequence is & must be a multiple of minlen!
-per_consec = 4#max allowed same consecutive answers
+per_consec = 4 #max allowed same consecutive answers
 stim_consec=4
 ans_consec=4 
 
-#generate long sequence by fragments---------------
+# generate long sequence by fragments---------------
 finished = FALSE
 c = 1
 while(!finished){
@@ -140,6 +143,7 @@ while(!finished){
   
 }# end of while loop
 
+# making a nicer output after things are done
 output.nice = data.frame(cond = paste0(output$per,output$persw),
                          stim = output$stim,
                          ans = output$ans,
