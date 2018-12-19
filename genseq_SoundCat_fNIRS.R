@@ -1,7 +1,7 @@
 # Generate sequence for sound categorization task in fNIRS neurofeedback
 # written by Enoch 20181219
 
-stiminfo = read_csv("stim_info.csv")
+stiminfo = read.csv("stim_info.csv")
 
 
 # check all stim types are present in a specified window
@@ -75,22 +75,22 @@ t2 = sample(1:10)
 t3 = sample(1:10)
 t4 = sample(1:10)
 
-output = data.frame(code = s) %>% group_by(code) %>% mutate(cnt = row_number())
-output = output %>% mutate(stim = case_when(code == 1 ~ one$sound[t1][cnt],
-                                            code == 2 ~ two$sound[t2][cnt],
-                                            code == 3 ~ three$sound[t3][cnt],
-                                            code == 4 ~ four$sound[t4][cnt]))
+output = data.frame(cat = s) %>% group_by(cat) %>% mutate(cnt = row_number())
+output = output %>% mutate(sound = case_when(cat == 1 ~ one$sound[t1][cnt],
+                                            cat == 2 ~ two$sound[t2][cnt],
+                                            cat == 3 ~ three$sound[t3][cnt],
+                                            cat == 4 ~ four$sound[t4][cnt]))
 
-output = output %>% mutate(temp = case_when(code == 1 ~ one$temp[t1][cnt],
-                                            code == 2 ~ two$temp[t2][cnt],
-                                            code == 3 ~ three$temp[t3][cnt],
-                                            code == 4 ~ four$temp[t4][cnt]))
+output = output %>% mutate(temp = case_when(cat == 1 ~ one$temp[t1][cnt],
+                                            cat == 2 ~ two$temp[t2][cnt],
+                                            cat == 3 ~ three$temp[t3][cnt],
+                                            cat == 4 ~ four$temp[t4][cnt]))
 
-output = output %>% mutate(spec = case_when(code == 1 ~ one$spec[t1][cnt],
-                                            code == 2 ~ two$spec[t2][cnt],
-                                            code == 3 ~ three$spec[t3][cnt],
-                                            code == 4 ~ four$spec[t4][cnt]))
+output = output %>% mutate(spec = case_when(cat == 1 ~ one$spec[t1][cnt],
+                                            cat == 2 ~ two$spec[t2][cnt],
+                                            cat == 3 ~ three$spec[t3][cnt],
+                                            cat == 4 ~ four$spec[t4][cnt]))
 
 
-
+#write.csv(output,'test1.csv',row.names=FALSE)
 
