@@ -72,10 +72,10 @@ setseq = function(n){
 }
 
 # -------------------- settings -----------------
-# per: S = True, O = False
+# per: W = True, S = False
 # stim: L = True, R = False
 # resp: L = True, R = False
-
+makemagic = function(haha){
 m = setseq(8)
 n = nrow(m)
 
@@ -86,10 +86,6 @@ stim_consec=4
 ans_consec=4 
 
 # generate long sequence by fragments---------------
-again = TRUE
-while(again){
-again = FALSE
-
 finished = FALSE
 c = 1
 while(!finished){
@@ -118,7 +114,7 @@ while(!finished){
   }
   
   # recoding
-  output = data.frame(per = ifelse(s[,1],"S","W")
+  output = data.frame(per = ifelse(s[,1],"W","S")
                       , stim=ifelse(s[,2], "L","R")
                       , ans=ifelse(s[,3], "L","R"))
   
@@ -158,12 +154,17 @@ j = which(z==1,arr.ind=TRUE)
 output.nice$cond[1]=rownames(z)[j[1]]
 output.nice$ans_rep[1]=colnames(z)[j[2]]
 
-# last line of defence
-if (substr(output.nice$cond[1],1,1)=="W"){
-  #again = FALSE
-}
+# save data to working directory
+save(output,output.nice,file = paste0(haha,output.nice$cond[1],output.nice$ans_rep[1],".RData"))
+return(c)
 
-} # end of biggest while loop
+} # end of function
+
+# making sequences
+runs = vector("numeric")
+for (y in 1:10){
+  runs= append(runs,makemagic(y))
+}
 
 
 # if something is messed up then run again
