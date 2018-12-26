@@ -75,7 +75,7 @@ setseq = function(n){
 # per: W = True, S = False
 # stim: L = True, R = False
 # resp: L = True, R = False
-makemagic = function(haha){
+makemagic = function(haha, returntype){
 m = setseq(8)
 n = nrow(m)
 
@@ -154,16 +154,33 @@ j = which(z==1,arr.ind=TRUE)
 output.nice$cond[1]=rownames(z)[j[1]]
 output.nice$ans_rep[1]=colnames(z)[j[2]]
 
-# save data to working directory
-save(output,output.nice,file = paste0(haha,output.nice$cond[1],output.nice$ans_rep[1],".RData"))
-return(c)
+# return different output depending on need
+if (returntype=="count"){
+  # save data to working directory
+  save(output,output.nice,file = paste0(haha,output.nice$cond[1],output.nice$ans_rep[1],".RData"))
+  return(c)
+}
+else if (returntype=="firstrow"){
+  save(output,output.nice,file = "found.RData")
+  return(paste0(output.nice$cond[1],output.nice$ans_rep[1]))
+}
+  
 
 } # end of function
 
-# making sequences
-runs = vector("numeric")
-for (y in 1:10){
-  runs= append(runs,makemagic(y))
+# # making sequences with for loop
+# runs = vector("numeric")
+# for (y in 41:50 ){
+#   runs= append(runs,makemagic(y,"count"))
+#   
+# }
+
+# find specific seq
+found = FALSE
+while(!found){
+  x = makemagic(0,"firstrow")
+  print(paste("------",x,"------"))
+  found = ("WShLSh"==x)
 }
 
 
