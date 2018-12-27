@@ -15,4 +15,15 @@ for(i in 1:nrow(index)){
   writeData(wb, sheet = i, output.nice)
 }
 
-saveWorkbook(wb, "all_seq.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "all_seq.xlsx", overwrite = FALSE)
+
+checking = data.frame(cond="---",stim="---",ans="---",ans_rep="---")
+# check seq
+for(i in 1:nrow(index)){
+  tmp = data.frame(cond=as.character(index$filenames[i]),stim="---",ans="---",ans_rep="---")
+  load(as.character(index$filenames[i]))
+  checking = rbind(checking,tmp,output.nice[1:3,])
+  print(i)
+}
+
+write.xlsx(checking, "check152seq.xlsx")
