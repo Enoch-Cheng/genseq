@@ -90,7 +90,7 @@ finished = FALSE
 c = 1
 while(!finished){
   
-  print(c)
+  #print(c)
   c=c+1
   pre = matrix(NA, nrow = 0, ncol = 3)
   s = matrix(NA, nrow = 0, ncol = 3)
@@ -168,25 +168,46 @@ else if (returntype=="firstrow"){
 
 } # end of function
 
-# # making sequences with for loop
-# runs = vector("numeric")
-# for (y in 41:50 ){
-#   runs= append(runs,makemagic(y,"count"))
-#   
-# }
 
-# find specific seq
-found = FALSE
-while(!found){
-  x = makemagic(0,"firstrow")
-  print(paste("------",x,"------"))
-  found = ("WShLSh"==x)
+#############################################################################################
+##################################### START GENERATING ######################################
+#############################################################################################
+mode = ""
+
+if (mode == "default"){
+  
+  # making sequences with for loop
+  runs = vector("numeric")
+  for (y in 53:152 ){
+    runs= append(runs,makemagic(y,"count"))
+  }
+  
+}else if (mode == "specific"){
+  
+  # find specific seq
+  found = FALSE
+  while(!found){
+    x = makemagic(0,"firstrow")
+    print(paste("------",x,"------"))
+    found = ("WShLSh"==x)
+  }
+  
+}else if (mode == "parallel"){
+  
+  # parallel computing
+  library(parallel)
+  n = detectCores(logical = FALSE)
+  cl = makeCluster(n)
+  clusterExport(cl, list("checkrep", "checkseq","genseq","setseq"))
+  runs = parLapply(cl, 1:10, makemagic,returntype = "count")
+  stopCluster(cl)
+  
 }
 
 
-# if something is messed up then run again
-#print("oop we need to run again ......................")
-#source("genseq_VSPT_EEG.R")
+
+
+
 
 
 # double checking ----------------
