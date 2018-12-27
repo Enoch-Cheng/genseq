@@ -1,6 +1,6 @@
 ###################################################################### 
 # Generate new pseudorandom sequence for VSPT EEG
-# v2c written by Enoch 20181219
+# v3 written by Enoch 20181227
 # Press "source" to run the whole program!
 # The generated sequence is stored in the dataframe called "output"
 # The "output" is then recoded nicely to "output.nice"
@@ -203,10 +203,6 @@ if (mode == "default"){
   stopCluster(cl)
   
 }
-
-
-
-
 
 
 
