@@ -92,5 +92,5 @@ output = output %>% mutate(spec = case_when(cat == 1 ~ one$spec[t1][cnt],
                                             cat == 4 ~ four$spec[t4][cnt]))
 
 
-#write.csv(output,'test3.csv',row.names=FALSE, quote = FALSE)
+write.csv(output,'seq3.csv',row.names=FALSE, quote = FALSE)
 
